@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import HomeLayout from "../Layouts/HomeLayout";
 import toast from "react-hot-toast";
