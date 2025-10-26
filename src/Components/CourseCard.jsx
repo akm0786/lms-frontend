@@ -10,7 +10,7 @@ function CourseCard({ data }) {
             className="text-white w-[22rem] h-[380px] p-2 shadow-lg rounded-lg coursor-pointer group overfow-hidden bg-zinc-700">
             <div className="overflow-hidden ">
                 <img
-                    className=" h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale=[1,2] transition-all ease-in-out duration-300 "
+                    className=" cursor-pointer object-contain h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale=[1,2] transition-all ease-in-out duration-300 "
                     src={data?.thumbnail?.secure_url}
                     onError={(e) => {
                         e.target.onError = null;

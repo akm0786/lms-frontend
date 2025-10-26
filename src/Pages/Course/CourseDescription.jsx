@@ -13,11 +13,11 @@ function CourseDescription() {
     },[])
     return (
         <HomeLayout>
-            <div className="min-h-[90vh] pt-12 px-20 flex flex-col items-center justify-center text-white">
-                <div className="grid grid-cols-2 gap-10 py-10 relative">
+            <div className="min-h-[90vh] pt-12 px-10 md:px-20 flex flex-col items-center justify-center text-white">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 py-10 relative">
                     <div className="space-y-5">
                         <img 
-                            className="w-full h-64"
+                            className="w-full h-64 object-contain"
                             alt="thumbnail"
                             src={state?.thumbnail?.secure_url }
                             onError={(e)=> {
@@ -26,7 +26,7 @@ function CourseDescription() {
                             }}
                         />
 
-                        <div className="space-y-4">
+                        <div className="space-y-4 w-full">
                             <div className="flex flex-col items-center justify-between text-xl">
 
                                 <p className="font-semibold">
@@ -46,11 +46,11 @@ function CourseDescription() {
                             </div>
 
                             { role === "ADMIN" || data?.subscription?.status === "ACTIVE" ? (
-                                <button className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300">
+                                <button className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-80 block mx-auto hover:bg-yellow-500 transition-all ease-in-out duration-300">
                                     Watch lectures
                                 </button>
                                 ) : (
-                                    <button className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300">
+                                    <button className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-80 block mx-auto hover:bg-yellow-500 transition-all ease-in-out duration-300">
                                         Subscribe
                                     </button>
                                 )
@@ -62,7 +62,7 @@ function CourseDescription() {
                     </div>
 
                     <div className="space-y-2 text-xl">
-                        <h1 className="text-3xl font-bold text-yellow-500 mb-5 text-center">
+                        <h1 className="text-3xl font-bold text-yellow-500 mb-5 text-left">
                             {state?.title}
                         </h1>
 
