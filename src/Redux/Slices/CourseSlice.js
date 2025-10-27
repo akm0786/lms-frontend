@@ -30,11 +30,35 @@ const courseSlice = createSlice({
         builder.addCase(getAllCourses.fulfilled, (state, action) => {
             if (action.payload) {
                 // console.log(action.payload);
-                
+
                 state.courseData = [...action.payload]
             }
         })
 
+    }
+})
+
+
+export const createNewCourse = createAsyncThunk('/course/create', async (data) => {
+
+    try {
+
+        let formData = new FormData();
+        formData.append('title', data?.title);
+        formData.append('description', data?.description);
+        formData.append('category', data?.category);
+        formData.append('thumbnail', data?.thumbnail);
+        formData.append('createdBy', data?.createdBy);
+
+        const response = axiosInstance.post('/courses', formData);
+        toast.promise(response,{
+            loading: 'Creating course...',
+            success: 'Course created successfully',
+            error: 'Failed to create course'
+        })
+        return (await response).data
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
     }
 })
 
