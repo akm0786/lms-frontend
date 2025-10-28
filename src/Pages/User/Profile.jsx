@@ -24,7 +24,7 @@ function Profile(){
                 <p>Subscription: <span>{userData?.subscription?.status === "active" ? "Active" : "Inactive"}</span></p>
             </div>
             <div className="flex  flex-col gap-2">
-                <button className="btn btn-dash btn-warning" ><Link to="/change-password">Change Password</Link></button>
+                <button className="btn btn-dash btn-warning" ><Link to="/user/change-password">Change Password</Link></button>
                 <button className="btn btn-neutral btn-outline" ><Link to="/user/editprofile">Edit Profile</Link></button>
 
             </div>

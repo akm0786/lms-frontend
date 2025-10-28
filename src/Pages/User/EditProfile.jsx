@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getUserData, updateProfile } from "../../Redux/Slices/AuthSlice"
 import { Link, useNavigate } from "react-router-dom"
 import HomeLayout from "../../Layouts/HomeLayout"
-import { BsPerson, BsPersonCircle } from "react-icons/bs"
+import { BsPersonCircle } from "react-icons/bs"
 function Editprofile() {
     const dispatch = useDispatch()
     const navigate = useNavigate()

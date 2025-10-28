@@ -15,6 +15,7 @@ import RequireAuth from './Components/Auth/RequireAuth';
 import CreateCourse from './Pages/Course/CreateCourse';
 import Profile from './Pages/User/Profile';
 import Editprofile from './Pages/User/EditProfile';
+import ChangePassword from './Pages/User/ChangePassword';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={['ADMIN', 'USER']} />}>
           <Route path="/user/profile" element={<Profile />} ></Route>
           <Route path="/user/editprofile" element={<Editprofile />} ></Route>
+          <Route path="/user/change-password" element={<ChangePassword />} ></Route>
         </Route>
 
         <Route path="/denied" element={<Denied />} ></Route>
