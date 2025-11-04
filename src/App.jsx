@@ -17,6 +17,7 @@ import Profile from './Pages/User/Profile';
 import Editprofile from './Pages/User/EditProfile';
 import ChangePassword from './Pages/User/ChangePassword';
 import ForgotPassword from './Pages/User/ForgotPassword';
+import ResetPassword from './Pages/User/ResetPassword';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
         </Route>
 
         <Route path="/user/forgot-password" element={<ForgotPassword />} ></Route>
+        <Route path='/user/reset-password/:resetToken' element={<ResetPassword />} ></Route>
         <Route path="/denied" element={<Denied />} ></Route>
         <Route path="/contact" element={<Contact />} ></Route>
         <Route path="/courses" element={<CourseList />} ></Route>
