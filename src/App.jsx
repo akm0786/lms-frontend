@@ -16,6 +16,7 @@ import CreateCourse from './Pages/Course/CreateCourse';
 import Profile from './Pages/User/Profile';
 import Editprofile from './Pages/User/EditProfile';
 import ChangePassword from './Pages/User/ChangePassword';
+import ForgotPassword from './Pages/User/ForgotPassword';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/user/change-password" element={<ChangePassword />} ></Route>
         </Route>
 
+        <Route path="/user/forgot-password" element={<ForgotPassword />} ></Route>
         <Route path="/denied" element={<Denied />} ></Route>
         <Route path="/contact" element={<Contact />} ></Route>
         <Route path="/courses" element={<CourseList />} ></Route>

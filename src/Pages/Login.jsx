@@ -76,8 +76,9 @@ function Login() {
                             value={loginData.password}
                         />
                     </div>
-                    <button type="submit" className="bg-yellow-500 mt-3 px-6 py-2 w-full rounded-md font-semibold text-lg text-gray-900 cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300">Create Account</button>
+                    <button type="submit" className="bg-yellow-500 mt-3 px-6 py-2 w-full rounded-md font-semibold text-lg text-gray-900 cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300">Login Account</button>
                     <p>Don't have an account? <span className="text-yellow-500 cursor-pointer"><Link to="/signup">Sign Up</Link></span></p>
+                    <p>Forgot Password? <span className="text-yellow-500 cursor-pointer"><Link to="/user/forgot-password">Reset Password</Link></span></p>
                 </form>
 
             </div>
