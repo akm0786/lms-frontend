@@ -18,6 +18,8 @@ import Editprofile from './Pages/User/EditProfile';
 import ChangePassword from './Pages/User/ChangePassword';
 import ForgotPassword from './Pages/User/ForgotPassword';
 import ResetPassword from './Pages/User/ResetPassword';
+import Checkout from './Pages/Payment/checkout';
+import CheckoutSuccess from './Pages/Payment/CheckoutSuccess';
 
 function App() {
 
@@ -36,6 +38,8 @@ function App() {
           <Route path="/user/profile" element={<Profile />} ></Route>
           <Route path="/user/editprofile" element={<Editprofile />} ></Route>
           <Route path="/user/change-password" element={<ChangePassword />} ></Route>
+          <Route path='/checkout' element={<Checkout />} ></Route>
+          <Route path='/checkout/success' element={<CheckoutSuccess />} ></Route>
         </Route>
 
         <Route path="/user/forgot-password" element={<ForgotPassword />} ></Route>
