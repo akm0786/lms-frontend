@@ -20,6 +20,7 @@ import ForgotPassword from './Pages/User/ForgotPassword';
 import ResetPassword from './Pages/User/ResetPassword';
 import Checkout from './Pages/Payment/checkout';
 import CheckoutSuccess from './Pages/Payment/CheckoutSuccess';
+import CheckoutFailure from './Pages/Payment/CheckoutFailure';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/user/change-password" element={<ChangePassword />} ></Route>
           <Route path='/checkout' element={<Checkout />} ></Route>
           <Route path='/checkout/success' element={<CheckoutSuccess />} ></Route>
+          <Route path='/checkout/fail' element={<CheckoutFailure />} ></Route>
         </Route>
 
         <Route path="/user/forgot-password" element={<ForgotPassword />} ></Route>
