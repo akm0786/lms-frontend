@@ -49,6 +49,7 @@ function AddLecture() {
         }
         const response = await dispatch(addCourseLecture(userInput));
         if (response?.payload?.success) {
+            navigate(-1);
             setUserInput({
                 id: courseDetails._id,
                 lecture: undefined,
@@ -61,9 +62,9 @@ function AddLecture() {
     }
 
     useEffect(() => {
-        // if (!courseDetails) {
-        //     navigate("/courses");
-        // }
+        if (!courseDetails) {
+            navigate("/courses");
+        }
     }, [])
 
     return (
