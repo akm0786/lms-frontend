@@ -38,6 +38,20 @@ const courseSlice = createSlice({
     }
 })
 
+export const deleteCourse = createAsyncThunk('/course/delete', async (id) => {
+    try {
+        const response = axiosInstance.delete(`/courses/${id}`)
+        toast.promise(response, {
+            loading: 'Deleting course...',
+            success: 'Course deleted successfully',
+            error: 'Failed to delete course'
+        })
+        return (await response).data
+
+    } catch (e) {
+        toast.error(e?.response?.data?.message);
+    }
+})
 
 export const createNewCourse = createAsyncThunk('/course/create', async (data) => {
 
@@ -51,7 +65,7 @@ export const createNewCourse = createAsyncThunk('/course/create', async (data) =
         formData.append('createdBy', data?.createdBy);
 
         const response = axiosInstance.post('/courses', formData);
-        toast.promise(response,{
+        toast.promise(response, {
             loading: 'Creating course...',
             success: 'Course created successfully',
             error: 'Failed to create course'
@@ -61,5 +75,7 @@ export const createNewCourse = createAsyncThunk('/course/create', async (data) =
         toast.error(error?.response?.data?.message);
     }
 })
+
+
 
 export default courseSlice.reducer;
