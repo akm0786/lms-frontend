@@ -1,44 +1,43 @@
-import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom"
-import { addCourseLecture } from "../../Redux/Slices/LectureSlice";
 import { useEffect, useState } from "react";
-import HomeLayout from "../../Layouts/HomeLayout";
+import toast from "react-hot-toast";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import HomeLayout from "../../Layouts/HomeLayout";
+import { addCourseLecture } from "../../Redux/Slices/LectureSlice";
 
 function AddLecture() {
-
-    const courseDetails = useLocation().state
-
+    const courseDetails = useLocation().state;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [userInput, setUserInput] = useState({
-        id: courseDetails._id,
+        id: courseDetails?._id,
         lecture: undefined,
         title: "",
         description: "",
         videoSrc: "",
-    })
+    });
 
     function handleInputChange(e) {
         const { name, value } = e.target;
-
         setUserInput({
             ...userInput,
             [name]: value
-        })
+        });
     }
 
     function handleVideo(e) {
         const video = e.target.files[0];
+        if (!video) return;
         const source = window.URL.createObjectURL(video);
 
         setUserInput({
             ...userInput,
             lecture: video,
             videoSrc: source
-        })
+        });
     }
 
     async function onFormSubmit(e) {
@@ -56,8 +55,7 @@ function AddLecture() {
                 title: "",
                 description: "",
                 videoSrc: "",
-            })
-
+            });
         }
     }
 
@@ -65,51 +63,103 @@ function AddLecture() {
         if (!courseDetails) {
             navigate("/courses");
         }
-    }, [])
+    }, [courseDetails, navigate]);
 
     return (
         <HomeLayout>
-            <div className="min-h-[90vh] text-white flex flex-col items-center justify-center gap-10 mx-16">
-                <div className="flex flex-col gap-5 p-2 shadow-[0_0_10px_black] w-96 rounded-lg">
+            {/* Theme-aware background and text color */}
+            <div className="min-h-[90vh] text-slate-800 dark:text-white flex flex-col items-center justify-center py-10 px-4 transition-colors duration-300">
+                
+                {/* Responsive Card Container */}
+                <div className="flex flex-col gap-5 p-6 shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_black] w-full max-w-[24rem] rounded-lg bg-white dark:bg-slate-800 border border-gray-100 dark:border-none">
+                    
                     <header className="flex items-center justify-center relative">
-                        <button onClick={() => navigate(-1)}
-                            className="absolute left-2 text-xl text-green-500"
+                        <button 
+                            onClick={() => navigate(-1)}
+                            className="absolute left-0 text-2xl text-yellow-600 hover:text-yellow-500 transition-all"
                         >
                             <AiOutlineArrowLeft />
                         </button>
-                        <h1 className="text-xl text-yellow-500 font-semibold">
-                            Add new Lecture
+                        <h1 className="text-xl text-yellow-500 font-bold">
+                            Add New Lecture
                         </h1>
                     </header>
-                    <form onSubmit={onFormSubmit} className="flex flex-col gap-3">
-                        <input className="bg-transparent px-3 py-1 border" type="text" name="title" value={userInput.title} onChange={handleInputChange} placeholder="Enter the Title of the Lecture" />
-                        <textarea className="bg-transparent px-3 py-1 border resize-none overflow-y-scroll h-36" type="text" name="description" value={userInput.description} onChange={handleInputChange} placeholder="Enter the description of the lecture" />
-                        {userInput.videoSrc ? (
 
-                            <video
-                                muted
-                                src={userInput.videoSrc}
-                                controls
-                                controlsList="nodownload nofullscreen"
-                                disablePictureInPicture
-                                className="object-fill rounded-tl-lg rounded-tr-lg w-full"
-                            >
+                    <form onSubmit={onFormSubmit} className="flex flex-col gap-4">
+                        
+                        <div className="flex flex-col gap-1">
+                            <label className="font-semibold text-sm">Title</label>
+                            <input 
+                                className="bg-transparent px-3 py-2 border border-gray-400 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-500 outline-none transition-all" 
+                                type="text" 
+                                name="title" 
+                                value={userInput.title} 
+                                onChange={handleInputChange} 
+                                placeholder="Lecture Title" 
+                            />
+                        </div>
 
-                            </video>
+                        <div className="flex flex-col gap-1">
+                            <label className="font-semibold text-sm">Description</label>
+                            <textarea 
+                                className="bg-transparent px-3 py-2 border border-gray-400 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-yellow-500 outline-none transition-all resize-none h-28" 
+                                name="description" 
+                                value={userInput.description} 
+                                onChange={handleInputChange} 
+                                placeholder="Lecture Description" 
+                            />
+                        </div>
 
-                        ) : (
-                            <div className="h-48 border flex items-center justify-center cursor-pointer">
-                                <label htmlFor="lecture" className="font-semibold text-cl cursor-pointer">Choose your Video</label>
-                                <input type="file" className="hidden" id="lecture" name="lecture" onChange={handleVideo} accept="video/mp4 video/x-mp4 video/*" />
-                            </div>
-                        )}
-                        <button type="submit" className="btn btn-primary font-semibold text-lg">Add new Lecture</button>
+                        {/* Video Upload Logic */}
+                        <div className="flex flex-col gap-1">
+                            <label className="font-semibold text-sm">Video Lecture</label>
+                            {userInput.videoSrc ? (
+                                <div className="space-y-2">
+                                    <video
+                                        muted
+                                        src={userInput.videoSrc}
+                                        controls
+                                        controlsList="nodownload"
+                                        disablePictureInPicture
+                                        className="object-contain rounded-md w-full h-44 bg-black"
+                                    />
+                                    <button 
+                                        type="button"
+                                        onClick={() => setUserInput({...userInput, videoSrc: "", lecture: undefined})}
+                                        className="text-xs text-red-500 font-bold hover:underline"
+                                    >
+                                        Remove/Change Video
+                                    </button>
+                                </div>
+                            ) : (
+                                <label 
+                                    htmlFor="lecture" 
+                                    className="h-44 border-2 border-dashed border-gray-400 dark:border-gray-600 rounded-md flex flex-col items-center justify-center cursor-pointer hover:border-yellow-500 transition-all"
+                                >
+                                    <span className="font-semibold opacity-60">Click to upload video</span>
+                                    <input 
+                                        type="file" 
+                                        className="hidden" 
+                                        id="lecture" 
+                                        name="lecture" 
+                                        onChange={handleVideo} 
+                                        accept="video/*" 
+                                    />
+                                </label>
+                            )}
+                        </div>
 
+                        <button 
+                            type="submit" 
+                            className="bg-yellow-500 hover:bg-yellow-600 text-white py-2.5 rounded-md font-bold text-lg shadow-md transition-all active:scale-[0.98] mt-2"
+                        >
+                            Add Lecture
+                        </button>
                     </form>
                 </div>
             </div>
         </HomeLayout>
-    )
+    );
 }
 
-export default AddLecture
+export default AddLecture;
